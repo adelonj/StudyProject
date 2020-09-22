@@ -5,6 +5,6 @@ import static org.junit.Assert.assertEquals;
 public class AppCoreTest {
     @Test
     public void shouldAnswerWithTrue() {
-        assertEquals("test", "test");
+        assertEquals("test1", "test1");
     }
 }
