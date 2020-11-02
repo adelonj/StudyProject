@@ -1,4 +1,4 @@
-public class Square implements Calculator {
+public class Square implements Figure {
     private int a;
 
     public Square(int a) {

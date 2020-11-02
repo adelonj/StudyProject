@@ -1,4 +1,4 @@
-public class Rectangle implements Calculator {
+public class Rectangle implements Figure {
     private int a;
     private int b;
 

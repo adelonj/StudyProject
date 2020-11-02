@@ -1,4 +1,4 @@
-public interface Calculator {
+public interface Figure {
 
     String getName();
     double getSquare();

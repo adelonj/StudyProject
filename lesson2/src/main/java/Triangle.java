@@ -1,4 +1,4 @@
-public class Triangle implements Calculator {
+public class Triangle implements Figure {
     private int a;
     private int b;
     private int c;
