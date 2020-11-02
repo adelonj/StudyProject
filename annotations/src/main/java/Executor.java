@@ -1,19 +1,12 @@
-
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RunMe {
+public class Executor {
 
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        run(Example1.class);
-        run(Example2.class);
-    }
-
-    private static void run(Class<?> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public void run(Class<?> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor constructor = clazz.getDeclaredConstructor();
 
         List<Method> beforeMethods = new ArrayList<>();
@@ -32,8 +25,8 @@ public class RunMe {
             }
         }
 
-        int skippedTestsCount = 0;
-        int failedTestsCount = 0;
+        int skipped = 0;
+        int failed = 0;
 
         for (Method method : testMethods) {
             Object object = constructor.newInstance();
@@ -42,37 +35,37 @@ public class RunMe {
             for (Method m : beforeMethods) {
                 try {
                     m.invoke(object);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                    skippedTestsCount += 1;
+                } catch (Throwable e) {
+                    System.err.println("@Before |  method [" + m.getName() + "] failed with error : " + e.getCause());
+                    skipped += 1;
                     beforeResult = false;
                 }
             }
             if (beforeResult) {
                 try {
                     method.invoke(object);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                    failedTestsCount += 1;
+                } catch (Throwable e) {
+                    System.err.println("@Test |  method [" + method.getName() + "] failed with error : " + e.getCause());
+                    failed += 1;
                 }
             }
             for (Method m : afterMethods)
                 try {
                     m.invoke(object);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+                } catch (Throwable e) {
+                    System.err.println("@After | method [" + m.getName() + "] failed with error : " + e.getCause());
                 }
         }
 
+        int success = testMethods.size() - failed - skipped;
+
         System.out.println("---------------------------------------");
         System.out.println("Statistics for run " + clazz.getName());
-        int successTestsCount = testMethods.size() - failedTestsCount - skippedTestsCount;
-        System.out.println("Skipped tests: " + skippedTestsCount);
-        System.out.println("Failed tests: " + failedTestsCount);
-        System.out.println("Success tests: " + successTestsCount);
-        System.out.println("All tests: " + (successTestsCount + failedTestsCount + skippedTestsCount));
+        System.out.println("Skipped tests: " + skipped);
+        System.out.println("Failed tests: " + failed);
+        System.out.println("Success tests: " + success);
+        System.out.println("All tests: " + (success + failed + skipped));
         System.out.println("---------------------------------------");
 
     }
-
 }

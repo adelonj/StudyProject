@@ -6,7 +6,7 @@ public class Example1 {
     @Before
     public void before1() {
         System.out.println("Invoke method - before1");
-        throw new RuntimeException("I failed here!");
+        //throw new RuntimeException("I failed here!");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class Example1 {
     @After
     public void after1() {
         System.out.println("Invoke method - after1");
-        // throw new RuntimeException("I failed here!");
+         throw new RuntimeException("I failed here!");
     }
 
     @After
