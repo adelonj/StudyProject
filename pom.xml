@@ -11,8 +11,11 @@
 
     <name>JavaReboot</name>
     <modules>
-        <module>lesson1</module>
-        <module>lesson2</module>
+        <module>algorithms</module>
+        <module>hw01-oop</module>
+        <module>hw02-lists</module>
+        <module>hw03-gc</module>
+        <module>hw04-annotations</module>
         <module>lesson4</module>
     </modules>
     <properties>

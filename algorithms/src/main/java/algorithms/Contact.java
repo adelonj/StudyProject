@@ -1,5 +1,10 @@
 package algorithms;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@ToString
+@EqualsAndHashCode
 public class Contact {
     private String lastName;
     private long phone;

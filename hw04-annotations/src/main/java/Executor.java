@@ -35,7 +35,7 @@ public class Executor {
             for (Method m : beforeMethods) {
                 try {
                     m.invoke(object);
-                } catch (Throwable e) {
+                } catch (Exception e) {
                     System.err.println("@Before |  method [" + m.getName() + "] failed with error : " + e.getCause());
                     skipped += 1;
                     beforeResult = false;
@@ -44,7 +44,7 @@ public class Executor {
             if (beforeResult) {
                 try {
                     method.invoke(object);
-                } catch (Throwable e) {
+                } catch (Exception e) {
                     System.err.println("@Test |  method [" + method.getName() + "] failed with error : " + e.getCause());
                     failed += 1;
                 }
@@ -52,7 +52,7 @@ public class Executor {
             for (Method m : afterMethods)
                 try {
                     m.invoke(object);
-                } catch (Throwable e) {
+                } catch (Exception e) {
                     System.err.println("@After | method [" + m.getName() + "] failed with error : " + e.getCause());
                 }
         }
