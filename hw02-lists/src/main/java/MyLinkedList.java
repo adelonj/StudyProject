@@ -103,7 +103,6 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
 
     @Override
     public T poll() {
-        //TODO реализовать
         T item = get(0);
         remove(item);
         return item;
@@ -129,9 +128,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>, MyQueue
         Node<T> index;
         T temp;
 
-        if (head == null) {
-            return;
-        } else {
+        if (head != null) {
             while (current != null) {
                 //Node index will point to node next to current
                 index = current.next;
