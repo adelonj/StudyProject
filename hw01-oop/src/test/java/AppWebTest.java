@@ -25,7 +25,7 @@ public class AppWebTest {
     @Test
     public void checkSquareCountSquare() {
         Square square = new Square(a);
-        assertEquals(square.getSquare(), a * 2, 0);
+        assertEquals(square.getSquare(), a * a, 0);
     }
 
     @Test
