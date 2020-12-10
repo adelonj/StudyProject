@@ -1,5 +1,6 @@
-# Project exclude paths
-/core/target/
-/target/
-/web/target/
-/.idea/
+*.iml
+.idea
+target
+*.class
+*.log
+tmp
